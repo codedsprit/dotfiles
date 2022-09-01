@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# xinitrc runs automatically when you run startx.
+
+# There are some small but important commands that need to be run when we start
+# the graphical environment. There is a link to this file in ~/.xprofile
+# because that file is run automatically if someone uses a display manager
+# (login screen) and so they are needed there. To prevent doubling up commands,
+# I source them here with the line below.
+
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ]; then
+	. "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile"
+else
+	. "$HOME/.xprofile"
+fi
+#photo=wal.png
+amixer set Master 80%
+photo=ok.jpg
+dir=~/pix
+#dir=/usr/share/backgrounds/metis/
+xwallpaper --zoom ${dir}/${photo} &
+wal -i ${dir}/${photo}
+#slstatus &
+picom --experimental-backend &
+slstatus &
+exec dwm

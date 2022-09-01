@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+wget --spider -q https://google.com
+[ "$?" -eq 0 ] && echo -e "\e[36m   Net is on"|| echo " Net is off"
+
